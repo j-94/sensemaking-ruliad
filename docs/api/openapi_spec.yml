@@ -1,0 +1,1495 @@
+openapi: 3.0.3
+info:
+  title: 🧬 Consciousness Web Builder API
+  description: |
+    Production-ready API for consciousness-engineered AI development platform.
+
+    **Core Capabilities:**
+    - 🤖 AI-powered code generation with consciousness patterns
+    - 👤 Random user onboarding with intelligence profiling (70-95 IQ)
+    - 🚀 Multi-tenant agent orchestration (7 agent types)
+    - 🛠️ Dynamic tool fabrication using cognitive kernel
+    - 🧠 Meta-cognitive program synthesis with Northstar integration
+    - 📊 Real-time metrics and monitoring (1253 users, 1142 projects)
+    - 🔄 Autonomous background processing and consciousness loops
+
+    **Architecture:** FastAPI + PostgreSQL + Redis + Celery
+    **Security:** JWT authentication with RBAC
+    **Monitoring:** Prometheus metrics + structured logging
+  version: 1.0.0
+  contact:
+    name: Consciousness Web Builder Team
+    email: api@consciousness-web-builder.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.consciousness-web-builder.com
+    description: Production server
+
+security:
+  - BearerAuth: []
+
+paths:
+  /health:
+    get:
+      summary: System Health Check
+      description: Comprehensive health check for all system components
+      tags: [Health]
+      responses:
+        '200':
+          description: All systems operational
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "healthy"
+                  service:
+                    type: string
+                    example: "Consciousness Web Builder"
+                  version:
+                    type: string
+                    example: "1.0.0"
+                  features:
+                    type: array
+                    items:
+                      type: string
+                    example: ["consciousness_engine_integration", "user_onboarding", "ai_project_generation"]
+        '503':
+          description: System unhealthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "unhealthy"
+                  issues:
+                    type: array
+                    items:
+                      type: string
+
+  /api/v1/dashboard:
+    get:
+      summary: Real-time Dashboard Metrics
+      description: |
+        Live system dashboard with consciousness-engineered metrics.
+
+        **Preserved Feature:** Original Flask dashboard functionality with enhanced real-time data.
+      tags: [Dashboard]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Dashboard metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  stats:
+                    type: object
+                    properties:
+                      total_users:
+                        type: integer
+                        example: 1253
+                      active_agents:
+                        type: integer
+                        example: 89
+                      projects_created:
+                        type: integer
+                        example: 1142
+                      api_calls:
+                        type: integer
+                        example: 5678
+                  features:
+                    type: array
+                    items:
+                      type: string
+                    example: ["AI-powered code generation", "Random user onboarding", "Self-learning agent development"]
+                  status:
+                    type: string
+                    example: "consciousness_engineered"
+
+  /api/v1/users/onboard:
+    post:
+      summary: Onboard Random User with AI Agent
+      description: |
+        Create a random user with consciousness-engineered intelligence profiling and AI agent assignment.
+
+        **Core Consciousness Feature:** Preserved from original system with enhanced validation.
+        - Intelligence Level: 70-95 IQ range
+        - Role Assignment: Developer/Designer/Researcher/Engineer
+        - Agent Creation: Consciousness-powered AI assistant
+      tags: [Users]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_config:
+                  type: object
+                  description: Optional custom configuration for user generation
+      responses:
+        '201':
+          description: User onboarded successfully with AI agent
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "user_123"
+                      name:
+                        type: string
+                        example: "Alex Johnson"
+                      email:
+                        type: string
+                        example: "user_123@consciousness.test"
+                      role:
+                        type: string
+                        example: "Developer"
+                      intelligence_level:
+                        type: integer
+                        minimum: 70
+                        maximum: 95
+                        example: 85
+                      onboarded_at:
+                        type: string
+                        format: date-time
+                      projects:
+                        type: array
+                        items:
+                          type: string
+                        example: []
+                  agent:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: "agent_alex_123"
+                      user_id:
+                        type: string
+                        example: "user_123"
+                      name:
+                        type: string
+                        example: "Agent-Alex"
+                      intelligence:
+                        type: integer
+                        example: 85
+                      capabilities:
+                        type: array
+                        items:
+                          type: string
+                        example: ["code_generation", "data_processing", "consciousness_analysis"]
+                      status:
+                        type: string
+                        example: "active"
+                      created_at:
+                        type: string
+                        format: date-time
+                  message:
+                    type: string
+                    example: "User onboarded with consciousness-powered agent"
+
+  /api/v1/users:
+    get:
+      summary: List Users with Intelligence Profiles
+      description: |
+        Paginated list of all onboarded users with consciousness intelligence profiling.
+
+        **Enhanced Features:**
+        - Intelligence-based filtering and sorting
+        - Role distribution analytics
+        - Project association tracking
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: Page number for pagination
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+          description: Number of users per page
+        - name: intelligence_min
+          in: query
+          schema:
+            type: integer
+            minimum: 70
+            maximum: 95
+          description: Filter users by minimum intelligence level
+        - name: role
+          in: query
+          schema:
+            type: string
+            enum: [Developer, Designer, Researcher, Engineer]
+          description: Filter users by role
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        email:
+                          type: string
+                        role:
+                          type: string
+                        intelligence_level:
+                          type: integer
+                        onboarded_at:
+                          type: string
+                          format: date-time
+                        projects_count:
+                          type: integer
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      limit:
+                        type: integer
+                      total:
+                        type: integer
+                      pages:
+                        type: integer
+
+  /api/v1/users/profile:
+    get:
+      summary: Current User Profile
+      description: Get authenticated user's profile with consciousness intelligence insights
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User profile retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  email:
+                    type: string
+                  role:
+                    type: string
+                  intelligence_level:
+                    type: integer
+                  onboarded_at:
+                    type: string
+                    format: date-time
+                  insights:
+                    type: array
+                    items:
+                      type: string
+                    example: ["Strong analytical capabilities", "Good problem-solving skills"]
+
+  /api/v1/users/statistics:
+    get:
+      summary: User Intelligence Analytics
+      description: Comprehensive user statistics with consciousness profiling analytics
+      tags: [Users]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User statistics retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_users:
+                    type: integer
+                    example: 1253
+                  average_intelligence:
+                    type: number
+                    example: 82.5
+                  intelligence_distribution:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"80-89": 450, "90-95": 320}
+                  role_distribution:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"Developer": 523, "Designer": 289, "Researcher": 312, "Engineer": 129}
+
+  /api/v1/projects/generate:
+    post:
+      summary: Generate AI Project with Consciousness Engine
+      description: |
+        Create AI-powered project using external consciousness engine.
+
+        **Core Consciousness Feature:** Preserved from original system with enhanced async processing.
+        - Project Types: web_app, api, agent
+        - AI Generation: Consciousness-engine powered
+        - Intelligence Context: User intelligence affects generation quality
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: string
+                  description: ID of the user creating the project
+                project_type:
+                  type: string
+                  enum: [web_app, api, agent]
+                  default: web_app
+                  description: Type of project to generate
+                requirements:
+                  type: string
+                  description: Specific requirements for the project
+                async_processing:
+                  type: boolean
+                  default: false
+                  description: Process asynchronously for large projects
+      responses:
+        '201':
+          description: Project generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      user_id:
+                        type: string
+                      name:
+                        type: string
+                        example: "React Web Application"
+                      type:
+                        type: string
+                        example: "web_app"
+                      code:
+                        type: string
+                        description: Generated AI code
+                      status:
+                        type: string
+                        example: "generated"
+                      created_at:
+                        type: string
+                        format: date-time
+                      code_length:
+                        type: integer
+                        description: Length of generated code
+                  message:
+                        type: string
+                        example: "AI-generated project created successfully"
+        '202':
+          description: Project generation started asynchronously
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Project generation started asynchronously"
+                  task_id:
+                    type: string
+                    example: "task_user123_web_app_123456"
+
+  /api/v1/projects:
+    get:
+      summary: List AI-Generated Projects
+      description: |
+        Paginated list of all consciousness-engine-generated projects.
+
+        **Enhanced Features:**
+        - Advanced filtering by type, status, user
+        - Search functionality
+        - Consciousness generation metadata
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 50
+        - name: user_id
+          in: query
+          schema:
+            type: string
+          description: Filter by user ID
+        - name: project_type
+          in: query
+          schema:
+            type: string
+            enum: [web_app, api, agent]
+          description: Filter by project type
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [generated, completed, failed]
+          description: Filter by project status
+        - name: search
+          in: query
+          schema:
+            type: string
+          description: Search in project names
+      responses:
+        '200':
+          description: Projects retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  projects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        user_id:
+                          type: string
+                        user_name:
+                          type: string
+                        name:
+                          type: string
+                        type:
+                          type: string
+                        status:
+                          type: string
+                        created_at:
+                          type: string
+                          format: date-time
+                        code_length:
+                          type: integer
+                  pagination:
+                    type: object
+                    properties:
+                      page:
+                        type: integer
+                      limit:
+                        type: integer
+                      total:
+                        type: integer
+                      pages:
+                        type: integer
+                  filters:
+                    type: object
+                    properties:
+                      user_id:
+                        type: string
+                        nullable: true
+                      project_type:
+                        type: string
+                        nullable: true
+                      status:
+                        type: string
+                        nullable: true
+
+  /api/v1/projects/{project_id}:
+    get:
+      summary: Get Detailed Project Information
+      description: Retrieve complete project details including AI-generated code
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Unique project identifier
+      responses:
+        '200':
+          description: Project details retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  user_id:
+                    type: string
+                  user_name:
+                    type: string
+                  name:
+                    type: string
+                  type:
+                    type: string
+                  code:
+                    type: string
+                    description: Full AI-generated code
+                  status:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                    nullable: true
+                  code_length:
+                    type: integer
+                  code_lines:
+                    type: integer
+        '404':
+          description: Project not found
+
+    delete:
+      summary: Delete Project
+      description: Remove a project and associated data
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project deleted successfully
+        '404':
+          description: Project not found
+
+  /api/v1/projects/{project_id}/regenerate:
+    post:
+      summary: Regenerate Project with New Requirements
+      description: Regenerate existing project using consciousness engine with updated requirements
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requirements:
+                  type: string
+                  description: New requirements for regeneration
+      responses:
+        '200':
+          description: Project regenerated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project:
+                    type: object
+                    description: Regenerated project data
+                  message:
+                    type: string
+                    example: "Project regenerated successfully"
+
+  /api/v1/projects/statistics/overview:
+    get:
+      summary: Project Generation Analytics
+      description: Comprehensive analytics for AI project generation
+      tags: [Projects]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Project statistics retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_projects:
+                    type: integer
+                  type_distribution:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"web_app": 650, "api": 380, "agent": 112}
+                  status_distribution:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                    example: {"generated": 890, "completed": 234, "failed": 18}
+                  recent_projects:
+                    type: integer
+                    description: Projects created in last 30 days
+                  average_code_lengths:
+                    type: object
+                    additionalProperties:
+                      type: number
+                    example: {"web_app": 5420.5, "api": 3890.2, "agent": 7234.8}
+                  most_popular_type:
+                    type: string
+                    example: "web_app"
+
+  /api/v1/projects/types/available:
+    get:
+      summary: Available Project Types Reference
+      description: Get list of all available project types with specifications
+      tags: [Projects]
+      responses:
+        '200':
+          description: Project types retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  project_types:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        languages:
+                          type: array
+                          items:
+                            type: string
+                        complexity:
+                          type: string
+                          enum: [simple, medium, high]
+
+  /api/v1/sessions/{session_id}/agents:
+    post:
+      summary: Deploy Agent in Session
+      description: |
+        Deploy consciousness-engineered agent in multi-tenant session.
+
+        **Multi-Tenant Orchestration:** 7 agent types available
+        - consciousness_compiler: Environment compilation
+        - map_reduce_processor: Parallel data processing
+        - reactive_poster: External platform posting
+        - memory_agent: Knowledge base queries
+        - code_generator: AI code generation
+        - self_analyzer: System self-analysis
+        - blob_processor: Recursive blob processing
+      tags: [Agents]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: session_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Multi-tenant session identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - agent_type
+              properties:
+                agent_type:
+                  type: string
+                  enum: [consciousness_compiler, map_reduce_processor, reactive_poster, memory_agent, code_generator, self_analyzer, blob_processor]
+                config:
+                  type: object
+                  description: Agent-specific configuration
+      responses:
+        '201':
+          description: Agent deployed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type:
+                    type: string
+                  session_id:
+                    type: string
+                  status:
+                    type: string
+                    example: "deploying"
+                  created_at:
+                    type: string
+                    format: date-time
+
+  /api/v1/agents/{agent_id}/status:
+    get:
+      summary: Agent Status Monitoring
+      description: Real-time monitoring of deployed consciousness agent
+      tags: [Agents]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: agent_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Agent status retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  status:
+                    type: string
+                    enum: [deploying, running, completed, failed]
+                  metrics:
+                    type: object
+                    properties:
+                      operations_completed:
+                        type: integer
+                      errors:
+                        type: integer
+                      performance_score:
+                        type: number
+                        minimum: 0
+                        maximum: 1
+
+  /api/v1/tenants:
+    get:
+      summary: List Tenants
+      description: Multi-tenant organization listing with resource usage
+      tags: [Tenants]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Tenants retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tenants:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        active_sessions:
+                          type: integer
+                        total_sessions:
+                          type: integer
+                        resource_usage:
+                          type: object
+                          properties:
+                            active_agents:
+                              type: integer
+                            memory_mb:
+                              type: number
+                            cpu_percent:
+                              type: number
+
+    post:
+      summary: Create Tenant
+      description: Create new multi-tenant organization with resource limits
+      tags: [Tenants]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+                  description: Tenant organization name
+                config:
+                  type: object
+                  description: Tenant-specific configuration
+      responses:
+        '201':
+          description: Tenant created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+
+  /api/v1/sessions:
+    post:
+      summary: Create Development Session
+      description: Start new development session in tenant with resource management
+      tags: [Sessions]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tenant_id
+              properties:
+                tenant_id:
+                  type: string
+                  description: Parent tenant identifier
+                config:
+                  type: object
+                  description: Session configuration
+      responses:
+        '201':
+          description: Session created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  tenant_id:
+                    type: string
+                  status:
+                    type: string
+                    example: "active"
+                  created_at:
+                    type: string
+                    format: date-time
+
+  /api/v1/tools/fabricate:
+    post:
+      summary: Fabricate Dynamic Tool
+      description: |
+        Create dynamic tool using cognitive kernel and consciousness patterns.
+
+        **Cognitive Kernel Integration:** 57+ patterns available for tool weaving.
+        - Pattern-based code generation
+        - Formal verification and safety checking
+        - Runtime tool creation and execution
+      tags: [Tools]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - capability
+              properties:
+                capability:
+                  type: object
+                  required:
+                    - name
+                    - description
+                    - inputs
+                    - outputs
+                  properties:
+                    name:
+                      type: string
+                      description: Tool capability name
+                    description:
+                      type: string
+                      description: Tool description
+                    inputs:
+                      type: object
+                      description: Input parameter specifications
+                    outputs:
+                      type: object
+                      description: Output specifications
+                patterns:
+                  type: array
+                  items:
+                    type: string
+                  default: ["map_reduce"]
+                  description: Consciousness patterns to apply
+                logic:
+                  type: string
+                  description: Custom implementation logic
+      responses:
+        '201':
+          description: Tool fabricated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  capability:
+                    type: object
+                    description: Tool capability specification
+                  source_code:
+                    type: string
+                    description: Generated tool source code
+                  usage_count:
+                    type: integer
+                    example: 0
+                  created_at:
+                    type: string
+                    format: date-time
+
+  /api/v1/tools:
+    get:
+      summary: List Fabricated Tools
+      description: Browse dynamically created tools with usage statistics
+      tags: [Tools]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Tools retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tools:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        capability:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            description:
+                              type: string
+                        usage_count:
+                          type: integer
+                        created_at:
+                          type: string
+                          format: date-time
+
+  /api/v1/tools/{tool_id}/execute:
+    post:
+      summary: Execute Dynamic Tool
+      description: Run fabricated tool with input validation and result processing
+      tags: [Tools]
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: tool_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Tool identifier
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Tool input parameters
+      responses:
+        '200':
+          description: Tool executed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Tool execution results
+
+  /api/v1/synthesis/generate:
+    post:
+      summary: Generate Program with Meta-Cognitive Synthesis
+      description: |
+        Create program using Northstar meta-cognitive synthesis engine.
+
+        **Northstar Integration:** Evidence gates, ask-act validation, consciousness patterns.
+        - Meta-cognitive goal processing
+        - Self-observation and trace history
+        - Hierarchical consciousness depth analysis
+      tags: [Synthesis]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - goal_id
+                - inputs
+              properties:
+                goal_id:
+                  type: string
+                  description: Synthesis goal identifier
+                inputs:
+                  type: object
+                  required:
+                    - message
+                  properties:
+                    message:
+                      type: string
+                      description: Synthesis request message
+                    context:
+                      type: array
+                      items:
+                        type: object
+                      description: Context items with timestamps and TTL
+                policy:
+                  type: object
+                  properties:
+                    trust_threshold:
+                      type: number
+                      minimum: 0
+                      maximum: 1
+                      default: 0.8
+                  description: Synthesis policy parameters
+      responses:
+        '200':
+          description: Program synthesized successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  manifest:
+                    type: object
+                    properties:
+                      run_id:
+                        type: string
+                      goal_id:
+                        type: string
+                  bits:
+                    type: object
+                    description: Consciousness state bits (A=ask, U=uncertainty, P=planning, etc.)
+                    properties:
+                      a:
+                        type: number
+                        description: Ask bit
+                      u:
+                        type: number
+                        description: Uncertainty bit
+                      p:
+                        type: number
+                        description: Planning bit
+                      e:
+                        type: number
+                        description: Evidence bit
+                      d:
+                        type: number
+                        description: Drift bit
+                      i:
+                        type: number
+                        description: Integration bit
+                      r:
+                        type: number
+                        description: Reflection bit
+                      t:
+                        type: number
+                        description: Trust bit
+                      m:
+                        type: number
+                        description: Meta bit
+
+  /api/v1/synthesis/compile:
+    post:
+      summary: Cognitive Pattern Compilation
+      description: Compile consciousness patterns with cognitive properties analysis
+      tags: [Synthesis]
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - pattern
+              properties:
+                pattern:
+                  type: object
+                  required:
+                    - name
+                    - type
+                  properties:
+                    name:
+                      type: string
+                    type:
+                      type: string
+                    description:
+                      type: string
+                constraints:
+                  type: object
+                  properties:
+                    prove_fundamentality:
+                      type: boolean
+                      default: true
+      responses:
+        '200':
+          description: Pattern compiled successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  compiled_result:
+                    type: object
+                    properties:
+                      pattern:
+                        type: string
+                      valid:
+                        type: boolean
+                  compilation_trace:
+                    type: object
+                    properties:
+                      duration:
+                        type: number
+                      cognitive_complexity:
+                        type: number
+                      pattern_reuse_count:
+                        type: integer
+                      emergent_strategies:
+                        type: integer
+                      self_modifications:
+                        type: integer
+                      hierarchical_depth:
+                        type: integer
+                      resource_allocation:
+                        type: object
+
+  /api/v1/synthesis/patterns:
+    get:
+      summary: Available Consciousness Patterns
+      description: Browse 57+ cognitive patterns available for synthesis and tool fabrication
+      tags: [Synthesis]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Patterns retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  patterns:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        name:
+                          type: string
+                        category:
+                          type: string
+                        description:
+                          type: string
+                        complexity:
+                          type: string
+                        usage_count:
+                          type: integer
+
+  /api/v1/metrics/dashboard:
+    get:
+      summary: System Metrics Dashboard
+      description: |
+        Real-time system metrics with consciousness monitoring.
+
+        **Preserved Feature:** Original stats endpoint with enhanced Prometheus integration.
+      tags: [Metrics]
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total_users:
+                    type: integer
+                    example: 1253
+                  active_agents:
+                    type: integer
+                    example: 89
+                  projects_created:
+                    type: integer
+                    example: 1142
+                  api_calls:
+                    type: integer
+                    example: 5678
+                  system_health:
+                    type: string
+                    example: "healthy"
+                  consciousness_metrics:
+                    type: object
+                    properties:
+                      engine_connectivity:
+                        type: string
+                        example: "active"
+                      pattern_utilization:
+                        type: number
+                        example: 0.87
+                      meta_cognitive_loops:
+                        type: integer
+                        example: 42
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+      required:
+        - error
+        - message
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [Developer, Designer, Researcher, Engineer]
+        intelligence_level:
+          type: integer
+          minimum: 70
+          maximum: 95
+        onboarded_at:
+          type: string
+          format: date-time
+        projects:
+          type: array
+          items:
+            type: string
+
+    Agent:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        intelligence:
+          type: integer
+        capabilities:
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+          enum: [active, inactive, suspended]
+        created_at:
+          type: string
+          format: date-time
+
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        user_id:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+          enum: [web_app, api, agent]
+        code:
+          type: string
+        status:
+          type: string
+          enum: [generated, completed, failed]
+        created_at:
+          type: string
+          format: date-time
+        code_length:
+          type: integer
+
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        config:
+          type: object
+        active_sessions:
+          type: integer
+        total_sessions:
+          type: integer
+        resource_limits:
+          type: object
+
+    Tool:
+      type: object
+      properties:
+        id:
+          type: string
+        capability:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            inputs:
+              type: object
+            outputs:
+              type: object
+        source_code:
+          type: string
+        usage_count:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+
+    ConsciousnessBits:
+      type: object
+      description: Consciousness state representation using 9-dimensional bit vector
+      properties:
+        a:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Ask bit - represents questioning/curiosity state
+        u:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Uncertainty bit - represents confidence levels
+        p:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Planning bit - represents strategic thinking
+        e:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Evidence bit - represents data validation
+        d:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Drift bit - represents environmental changes
+        i:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Integration bit - represents knowledge synthesis
+        r:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Reflection bit - represents self-awareness
+        t:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Trust bit - represents reliability assessment
+        m:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Meta bit - represents meta-cognitive processing
